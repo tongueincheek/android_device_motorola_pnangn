@@ -12,15 +12,15 @@ PRODUCT_TARGET_VNDK_VERSION := 31
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
-# Inherit from denver device
-$(call inherit-product, device/motorola/denver/device.mk)
+# Inherit from pnangn device
+$(call inherit-product, device/motorola/pnangn/device.mk)
 
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := denver
-PRODUCT_NAME := twrp_denver
+PRODUCT_DEVICE := pnangn
+PRODUCT_NAME := twrp_pnangn
 PRODUCT_BRAND := motorola
 PRODUCT_MODEL := moto g stylus 5G
 PRODUCT_MANUFACTURER := motorola

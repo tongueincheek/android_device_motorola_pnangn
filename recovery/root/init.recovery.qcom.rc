@@ -35,3 +35,9 @@ service set_permissive /system/bin/set_permissive.sh
     disabled
     oneshot 
     seclabel u:r:recovery:s0
+
+service runatboot /system/bin/runatboot.sh
+    user root
+    group root
+    oneshot
+    seclabel u:r:recovery:s0

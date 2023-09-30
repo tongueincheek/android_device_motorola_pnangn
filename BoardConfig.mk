@@ -5,7 +5,7 @@
 # Copyright (C) 2022-juic3b0x
 #
 
-DEVICE_PATH := device/motorola/denver
+DEVICE_PATH := device/motorola/pnangn
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -33,7 +33,7 @@ BUILD_BROKEN_DUP_RULES := true
 TARGET_USES_UEFI := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := denver
+TARGET_OTA_ASSERT_DEVICE := pnangn
 
 # Build Error Bypass Fix
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -82,15 +82,15 @@ BOARD_KERNEL_CMDLINE += iptable_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += ip6table_raw.raw_before_defrag=1
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
 BOARD_KERNEL_CMDLINE += androidboot.hab.csv=9
-BOARD_KERNEL_CMDLINE += androidboot.hab.product=denver
+BOARD_KERNEL_CMDLINE += androidboot.hab.product=pnangn
 BOARD_KERNEL_CMDLINE += androidboot.hab.cid=50
 BOARD_KERNEL_CMDLINE += buildvariant=eng
 
 KERNEL_LD := LLVM=1
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := denver_defconfig
-TARGET_KERNEL_SOURCE := kernel/motorola/denver
+TARGET_KERNEL_CONFIG := pnangn_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola/pnangn
 NEED_KERNEL_MODULE_RECOVERY := true
 
 # Metadata
