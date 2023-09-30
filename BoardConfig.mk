@@ -10,6 +10,22 @@ DEVICE_PATH := device/motorola/pnangn
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 
+# A/B
+AB_OTA_UPDATER := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+AB_OTA_PARTITIONS += \
+    boot \
+    dtbo \
+    product \
+    system \
+    system_ext \
+    recovery \
+    vbmeta \
+    vbmeta_system \
+    vendor \
+    vendor_dlkm \
+    vendor_boot
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
@@ -53,17 +69,25 @@ AB_OTA_PARTITIONS := \
     vendor_boot
 
 # Build Flags
-TW_MAINTAINER := ragarcia87
-TW_DEVICE_VERSION := v2
-RECOVERY_VARIANT := twrp-12.1
 ALLOW_MISSING_DEPENDENCIES := true
 LC_ALL := "C"
 
+# Init
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_pnangn
+TARGET_RECOVERY_DEVICE_MODULES := libinit_pnangn
+
 # Kernel
-BOARD_KERNEL_CMDLINE := twrpfastboot=1
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+BOARD_KERNEL_CMDLINE += printk.devkmsg=on firmware_class.path=/data/vendor/param/firmware
+BOARD_BOOTCONFIG += \
+    androidboot.hardware=qcom \
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3
+
+BOARD_KERNEL_CMDLINE += twrpfastboot=1
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --dtb device/motorola/pnangn/prebuilt/dtb.img
 
 BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8
 BOARD_KERNEL_CMDLINE += earlycon=msm_geni_serial,0x04C8C000
@@ -129,6 +153,34 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+RECOVERY_SDCARD_ON_DATA := true
+
+# Crypto
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+TW_USE_FSCRYPT_POLICY := 2
+
+# TWRP Configuration
+TW_THEME := portrait_hdpi
+TW_EXTRA_LANGUAGES := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_NTFS_3G := true
+TW_BACKUP_EXCLUSIONS := /data/fonts
+TW_NO_SCREEN_BLANK := true
+TW_MAX_BRIGHTNESS := 3515
+TW_DEFAULT_BRIGHTNESS := 1024
+TW_FRAMERATE := 120
+TW_HAS_EDL_MODE := true
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone39/temp
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
