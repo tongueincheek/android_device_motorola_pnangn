@@ -11,6 +11,9 @@ PRODUCT_TARGET_VNDK_VERSION := 31
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Inherit from pnangn device
 $(call inherit-product, device/motorola/pnangn/device.mk)
@@ -22,5 +25,5 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 PRODUCT_DEVICE := pnangn
 PRODUCT_NAME := twrp_pnangn
 PRODUCT_BRAND := motorola
-PRODUCT_MODEL := moto g stylus 5G
+PRODUCT_MODEL := moto g 5G
 PRODUCT_MANUFACTURER := motorola
