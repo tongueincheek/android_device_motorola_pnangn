@@ -20,7 +20,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 LOCAL_PATH := device/motorola/pnangn
 
 # API
+BOARD_SHIPPING_API_LEVEL := 30
+BOARD_API_LEVEL := 31
 PRODUCT_SHIPPING_API_LEVEL := 31
+SHIPPING_API_LEVEL := 31
 
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -42,6 +45,11 @@ PRODUCT_PACKAGES_DEBUG += \
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+PRODUCT_PACKAGES += \
+    sg_write_buffer \
+    f2fs_io \
+    check_f2fs
 
 # Fastbootd
 PRODUCT_PACKAGES += \
@@ -66,39 +74,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
-
-# TWRP Configuration
-TW_THEME := portrait_hdpi
-RECOVERY_SDCARD_ON_DATA := true
-TARGET_RECOVERY_QCOM_RTC_FIX := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXTRA_LANGUAGES := true
-TW_INCLUDE_NTFS_3G := true
-TW_USE_TOOLBOX := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone79/temp"
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
-TARGET_USES_MKE2FS := true
-TW_NO_SCREEN_BLANK := true
-TW_EXCLUDE_APEX := true
-
-# Crypto
-TW_USE_FSCRYPT_POLICY := 2
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-PLATFORM_SECURITY_PATCH := 2099-12-31
-VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 127
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
-BOARD_USES_QCOM_FBE_DECRYPTION := true
-
-TW_LOAD_VENDOR_MODULES := "moto_f_usbnet.ko nova_0flash_mmi.ko mmi-smbcharger-iio.ko qpnp_adaptive_charge.ko utags.ko"
 
 TARGET_RECOVERY_DEVICE_MODULES += \
     libandroidicu \

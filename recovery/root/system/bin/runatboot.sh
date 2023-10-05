@@ -4,6 +4,7 @@ mount /vendor_dlkm
 mount /vendor
 modprobe -d /vendor/lib/modules /vendor/lib/modules/nova_0flash_mmi.ko
 modprobe -d /vendor/lib/modules /vendor/lib/modules/ili9882_mmi.ko
+modprobe -d /vendor/lib/modules /vendor/lib/modules/mmi-smbcharger-iio.ko
 sleep 1
 if [ $(cat /sys/class/touchscreen/primary/productinfo) == "NT36672C" ]
 then
